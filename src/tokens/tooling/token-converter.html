@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON to StyleX Variables Converter with Enhanced Color Grid</title>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        padding: 40px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 80%;
+        max-width: 600px;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 30px;
+      }
+
+      textarea {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        padding: 12px 15px;
+        font-size: 15px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+        resize: vertical;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      button:last-child {
+        margin-right: 0;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #result {
+        background-color: #fafafa;
+        color: #333;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
+      <button id="formatButton" onclick="formatJson()">Format JSON</button>
+      <button id="convertButton" onclick="convertDesignTokensToJson()">Convert</button>
+      <pre id="result"></pre>
+    </div>
+
+    <script>
+      function formatJson() {
+        const jsonInput = document.getElementById("jsonInput").value;
+        try {
+          const formattedJson = prettier.format(jsonInput, { parser: "json", plugins: prettierPlugins });
+          document.getElementById("jsonInput").value = formattedJson;
+        } catch (error) {
+          alert("Invalid JSON format");
+        }
+      }
+
+      function convertDesignTokensToJson() {
+        const jsonInput = document.getElementById("jsonInput").value;
+        try {
+          const jsonData = JSON.parse(jsonInput);
+          let stylexVars = [];
+
+          function traverse(obj, path = []) {
+            for (let [key, value] of Object.entries(obj)) {
+              // Convert '-' in key to '_'
+              key = key.replace(/-/g, "_");
+              const newPath = path.concat(key);
+
+              if (typeof value === "string" && value.startsWith("{") && value.endsWith("}")) {
+                // Process the string value as a reference
+                let processedValue = processReferenceValue(value);
+                const name = newPath.join("_");
+                stylexVars.push(`${name}: ${processedValue}`);
+              } else if (value.hasOwnProperty("value") && typeof value.value === "string") {
+                // Directly use the value or process if it's a reference
+                let processedValue = value.value.startsWith("{") && value.value.endsWith("}") ? processReferenceValue(value.value) : `"${value.value}"`;
+                const name = newPath.join("_");
+                stylexVars.push(`${name}: ${processedValue}`);
+              } else if (typeof value === "object" && value !== null) {
+                traverse(value, newPath);
+              }
+            }
+          }
+
+          function processReferenceValue(value) {
+            // Remove the curly brackets
+            value = value.slice(1, -1);
+            // Split by '.' to handle root separator
+            let parts = value.split(".");
+            if (parts.length > 1) {
+              // Join all parts with '_', except the first one which retains '.'
+              return parts[0] + "." + parts.slice(1).join("_");
+            }
+            return value;
+          }
+
+          traverse(jsonData); // Start traversing from the root
+
+          const stylexCode = stylexVars.join(",\n");
+          document.getElementById("result").textContent = stylexCode; // Display the result
+        } catch (error) {
+          console.error("Error processing JSON:", error);
+          document.getElementById("result").textContent = "Error processing JSON.";
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prettier@2.3.2/standalone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prettier@2.3.2/parser-babel.js"></script>
+  </body>
+</html>
