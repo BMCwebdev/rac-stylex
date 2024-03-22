@@ -1,7 +1,7 @@
 {
   "name": "@BMCwebdev/rac-stylex",
   "description": "RAC tailwind to stylex",
-  "version": "0.0.3",
+  "version": "0.0.3-removedStylexVars",
   "type": "module",
   "main": "dist/racstylex.es.js",
   "module": "dist/racstylex.es.js",

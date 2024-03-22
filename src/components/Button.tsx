@@ -4,7 +4,7 @@ import {
 } from 'react-aria-components';
 import * as stylex from '@stylexjs/stylex';
 
-import { colors } from '../tokens/colors.stylex';
+// import { colors } from '../tokens/colors.stylex';
 import { styleXFocusRing } from './utils';
 
 export interface ButtonProps extends RACButtonProps {
@@ -35,7 +35,8 @@ const buttonStyle = stylex.create({
 const variants = stylex.create({
   primary: {
     backgroundColor: {
-      default: colors.peri_500,
+      default: 'rebeccapurple',
+      // default: colors.peri_500,
       ':hover': {
         default: '#1D4ED8',
         ':is([data-pressed])': '#1E40AF',

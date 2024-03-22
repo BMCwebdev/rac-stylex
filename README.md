@@ -9,6 +9,7 @@
 * Everything works fine while you are here, inside the component library. You can run `npm run dev` and success!
 * When you import this component libary into another app, that's when you start to have issues. Example app can be found here https://github.com/BMCwebdev/remix-app
 * If you remove the use of the `colors` vars in the Button component (import statement and actual usage), everything will work fine in the consuming app.
+* Currently there are two up-to-date package versions, `0.0.3` and `0.0.3-removedStylexVars`. You can import either into a consuming app to test.
 * However I'm still not sure how to incorperate the tokens into the component library. How will users of this library use them in their own app (how will they import them)?
 
 * The other big to-do on the list. Figure a way to get the React Aria Component render props into the Stylex spread function.
