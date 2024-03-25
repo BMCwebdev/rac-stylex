@@ -1,0 +1,14 @@
+{
+  "name": "@BMCwebdev/stitch-tokens",
+  "version": "0.0.1",
+  "description": "Design Tokens",
+  "exports": {
+    "./colors.stylex": "./colors.stylex.js",
+    "./fonts.stylex": "./fonts.stylex.js",
+    "./sizes.stylex": "./sizes.stylex.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": "https://github.com/BMCwebdev/rac-stylex"
+}

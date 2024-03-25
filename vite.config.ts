@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => ({
         './src/App.tsx',
         './src/ArchivedApp.tsx',
         './src/main.tsx',
-        './src/tokens/**/*',
+        './rac-stylex-tokens/**/*',
         // Add more specific paths or patterns as needed
       ],
       outDir: './dist/types',
@@ -32,7 +32,16 @@ export default defineConfig(({ command }) => ({
       fileName: (format) => `racstylex.${format}.js`, // Naming pattern for output files
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react-aria-components', '@stylexjs/stylex', 'vite-plugin-stylex'],
+      external: [
+        'react',
+        'react-dom',
+        'react-aria-components',
+        '@stylexjs/stylex',
+        'vite-plugin-stylex',
+        '@bonterratech/rac-stylex-tokens/colors.stylex',
+        '@bonterratech/rac-stylex-tokens/fonts.stylex',
+        '@bonterratech/rac-stylex-tokens/sizes.stylex',
+      ],
       output: {
         globals: {
           react: 'React',
