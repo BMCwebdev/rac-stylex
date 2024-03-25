@@ -38,9 +38,9 @@ export default defineConfig(({ command }) => ({
         'react-aria-components',
         '@stylexjs/stylex',
         'vite-plugin-stylex',
-        '@bonterratech/rac-stylex-tokens/colors.stylex',
-        '@bonterratech/rac-stylex-tokens/fonts.stylex',
-        '@bonterratech/rac-stylex-tokens/sizes.stylex',
+        '@bmcwebdev/rac-stylex-tokens/colors.stylex',
+        '@bmcwebdev/rac-stylex-tokens/fonts.stylex',
+        '@bmcwebdev/rac-stylex-tokens/sizes.stylex',
       ],
       output: {
         globals: {

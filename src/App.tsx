@@ -18,7 +18,7 @@ function App() {
         <Button
           onPress={() => setCount((count) => count + 1)}
         >
-          Bonterra Button count is {count}
+          Button count is {count}
         </Button>
       </div>
     </div>
