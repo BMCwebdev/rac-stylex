@@ -49,4 +49,4 @@ function convertColorsToStylex(inputFilePath, colorsOutputPath, aliasOutputPath)
 }
 
 // Call the function with paths for the JSON input, colors output, and alias output files.
-convertColorsToStylex('stitch-tokens.json', 'colors.stylex.js', 'aliasColors.stylex.js');
+convertColorsToStylex('tokens.json', 'colors.stylex.js', 'aliasColors.stylex.js');

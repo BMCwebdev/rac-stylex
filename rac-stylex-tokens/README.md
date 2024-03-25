@@ -1,6 +1,6 @@
 This directory is a work in progress.
 
-The file `stitch-tokens.json` are the orginal tokens provided by the UX team.
+The file `tokens.json` are the orginal tokens provided by the UX team.
 
 In the `tooling` directory is an HTML file that creates a page to assist in converting the JSON into the format that Stylex requires. However, after experimenting with this I quickly realized that the originating JSON file is too complex, and that it didn't map well to the logic that would be needed for the component library.
 

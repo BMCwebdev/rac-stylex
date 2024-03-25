@@ -1,7 +1,7 @@
 {
   "name": "@BMCwebdev/rac-stylex",
   "description": "RAC tailwind to stylex",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "type": "module",
   "workspaces": [
     "./rac-stylex-tokens/"
@@ -37,7 +37,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "peerDependencies": {
-    "@BMCwebdev/stitch-tokens": "^0.0.1",
+    "@bmcwebdev/rac-stylex-tokens": "^0.0.2",
     "@stylexjs/stylex": "^0.5.1",
     "react": "^18.2.0",
     "react-aria-components": "^1.1.1",

@@ -1,6 +1,6 @@
 {
-  "name": "@BMCwebdev/stitch-tokens",
-  "version": "0.0.1",
+  "name": "@BMCwebdev/rac-stylex-tokens",
+  "version": "0.0.2",
   "description": "Design Tokens",
   "exports": {
     "./colors.stylex": "./colors.stylex.js",
