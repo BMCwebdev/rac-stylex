@@ -1,8 +1,8 @@
 import {
   Button as RACButton,
   ButtonProps as RACButtonProps,
+  ButtonRenderProps,
 } from 'react-aria-components';
-import { useFocusRing } from 'react-aria';
 import * as stylex from '@stylexjs/stylex';
 
 import { colors } from '@bmcwebdev/rac-stylex-tokens/colors.stylex';
@@ -112,17 +112,21 @@ const disabled = stylex.create({
 
 export function Button({ variant = 'primary', ...props }: ButtonProps) {
   const variantStyles = variant ? variants[variant] : undefined;
-  const { isFocusVisible, focusProps } = useFocusRing();
   return (
     <RACButton
       {...props}
-      {...(focusProps as any)}
-      {...stylex.props(
+      className={(renderProps: ButtonRenderProps) => stylex.props(
         buttonStyle.base,
         variantStyles,
-        isFocusVisible && styleXFocusRing.base,
+        renderProps.isFocusVisible && styleXFocusRing.base,
         props.isDisabled && disabled.base,
-      )}
+      ).className || ''}
+      style={(renderProps: ButtonRenderProps) => stylex.props(
+        buttonStyle.base,
+        variantStyles,
+        renderProps.isFocusVisible && styleXFocusRing.base,
+        props.isDisabled && disabled.base,
+      ).style || {}}
     />
   );
 }
